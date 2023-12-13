@@ -3,7 +3,7 @@
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-apt-get install -y curl git
+apt-get install -y git
 
 # Prompt user for GitHub credentials
 read -p "Enter your GitHub email address: " EMAIL
@@ -11,7 +11,7 @@ read -s -p "Enter your GitHub personal access token: " TOKEN
 echo
 
 # Generate an ED25519 SSH key
-ssh-keygen -t ed25519 -C "$EMAIL" -q
+ssh-keygen -q -t ed25519 -C "$EMAIL" -N ""
 
 # Add the SSH key to the SSH agent
 eval "$(ssh-agent -s)"
@@ -30,13 +30,13 @@ curl -L \
     -d "{\"title\":\"$(hostname)\",\"key\":\"$ssh_public_key\"}"
 
 echo "We are going to download needed files:)"
-GITHUB_REPOSITORY=shovel-project
-GITHUB_USER=barzinco
-GITHUB_BRANCH=stable
-DIR_NAME=.barzin
+GITHUB_REPOSITORY="shovel-project"
+GITHUB_USER="barzinco"
+GITHUB_BRANCH="stable"
+DIR_NAME=".barzin"
 
 mkdir -p "$HOME/$DIR_NAME"
 cd "$HOME/$DIR_NAME"
 git clone --single-branch --branch $GITHUB_BRANCH git@github.com:$GITHUB_USER/$GITHUB_REPOSITORY.git
 
-bash $GITHUB_REPOSITORY/common/install.sh
+bash "$GITHUB_REPOSITORY/common/install.sh"
