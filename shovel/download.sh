@@ -38,5 +38,6 @@ DIR_NAME=".barzin"
 mkdir -p "$HOME/$DIR_NAME"
 cd "$HOME/$DIR_NAME"
 git clone --single-branch --branch $GITHUB_BRANCH git@github.com:$GITHUB_USER/$GITHUB_REPOSITORY.git
+cd "$(dirname -- "$0")/$GITHUB_REPOSITORY"
 
-bash "$GITHUB_REPOSITORY/common/install.sh"
+bash "$(dirname -- "$0")/common/install.sh"
