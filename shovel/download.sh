@@ -39,4 +39,4 @@ mkdir -p "$HOME/$DIR_NAME"
 cd "$HOME/$DIR_NAME"
 git clone --single-branch --branch $GITHUB_BRANCH git@github.com:$GITHUB_USER/$GITHUB_REPOSITORY.git
 
-bash "$HOME/$DIR_NAME/$GITHUB_REPOSITORY/common/install.sh"
+bash "$GITHUB_REPOSITORY/common/install.sh"
