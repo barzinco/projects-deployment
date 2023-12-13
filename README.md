@@ -9,7 +9,7 @@ Streamline and automate the deployment process for Barzin projects with this rep
 - Connect to your **computing node** through **ssh**, copy and run the following command in the **terminal**
 
 ```bash
-$ sudo apt-get install -y curl && sudo bash -c "$(curl -Lfo- https://raw.githubusercontent.com/barzinco/projects-deployment/main/shovel/download.sh)"
+$ sudo apt-get install -y curl && bash -c "$(curl -Lfo- https://raw.githubusercontent.com/barzinco/projects-deployment/main/shovel/download.sh)"
 ```
 
 **Congratulations, the installation is complete.**

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get update
-apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-apt-get install -y git
+sudo apt-get update
+sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+sudo apt-get install -y git
 
 # Prompt user for GitHub credentials
 read -p "Enter your GitHub email address: " EMAIL
