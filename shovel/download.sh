@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get update
 sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-sudo apt-get install -y git
+sudo apt-get install -y git jq
 
 # Prompt user for GitHub credentials
 read -p "Enter your GitHub email address: " EMAIL
 read -s -p "Enter your GitHub personal access token: " TOKEN
 echo
 
-# Generate an ED25519 SSH key
-ssh-keygen -q -t ed25519 -C "$EMAIL" -N ""
-
-# Add the SSH key to the SSH agent
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-
-# Get the SSH public key
-ssh_public_key=$(cat ~/.ssh/id_ed25519.pub)
+if ! [ -f "$HOME/.ssh/id_ed25519" ]; then
+    # Generate an ED25519 SSH key
+    ssh-keygen -q -t ed25519 -C "$EMAIL" -N "" <<<$'\ny' >/dev/null 2>&1
+    eval "$(ssh-agent -s)"
+    ssh-add "$HOME/.ssh/id_ed25519"
+    ssh_public_key=$(cat "$HOME/.ssh/id_ed25519.pub")
+fi
 
 # Add the SSH public key to the GitHub account
 curl -L \
