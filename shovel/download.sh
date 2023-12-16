@@ -2,7 +2,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-sudo apt-get install -y git jq
+sudo apt-get install -y git
 
 # Prompt user for GitHub credentials
 read -p "Enter your GitHub email address: " EMAIL
@@ -18,6 +18,7 @@ if ! [ -f "$HOME/.ssh/id_ed25519" ]; then
 fi
 
 # Add the SSH public key to the GitHub account
+ssh_public_key=$(cat "$HOME/.ssh/id_ed25519.pub")
 curl -L \
     -X POST \
     -H "Accept: application/vnd.github+json" \
