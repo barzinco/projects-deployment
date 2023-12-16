@@ -12,12 +12,11 @@ echo
 if ! [ -f "$HOME/.ssh/id_ed25519" ]; then
     # Generate an ED25519 SSH key
     ssh-keygen -q -t ed25519 -C "$EMAIL" -N "" <<<$'\ny' >/dev/null 2>&1
-    eval "$(ssh-agent -s)"
-    ssh-add "$HOME/.ssh/id_ed25519"
-    ssh_public_key=$(cat "$HOME/.ssh/id_ed25519.pub")
 fi
 
 # Add the SSH public key to the GitHub account
+eval "$(ssh-agent -s)"
+ssh-add "$HOME/.ssh/id_ed25519"
 ssh_public_key=$(cat "$HOME/.ssh/id_ed25519.pub")
 curl -L \
     -X POST \
