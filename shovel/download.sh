@@ -2,7 +2,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-sudo apt-get install -y git
+sudo apt-get install -y git sharutils
 
 # Prompt user for GitHub credentials
 read -p "Enter your GitHub email address: " EMAIL
